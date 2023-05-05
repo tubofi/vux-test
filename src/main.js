@@ -23,6 +23,6 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  router,
-  render: h => h(App)
+  router,   //软路由路径，
+  render: h => h(App)   //映射到App.vue来渲染页面，App是所有页面的容器
 }).$mount('#app-box')

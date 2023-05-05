@@ -2,8 +2,9 @@
   <div>
     <div class="vux-demo">
       <img class="logo" src="../assets/vux_logo.png">
-      <h1> </h1>
+      <h1> 什么标题 </h1>
     </div>
+    <!--group应该是vux的一个组件？vux有哪些组件？-->
     <group title="cell demo">
       <cell title="VUX" value="cool" is-link></cell>
     </group>
