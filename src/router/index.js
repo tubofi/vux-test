@@ -12,7 +12,7 @@ export default new Router({
 /*      name: 'HelloWorld',
       component: HelloWorld*/
       name: "Try",
-      component: Try
+      component: Try,
     }
   ]
 })
