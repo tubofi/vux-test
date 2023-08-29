@@ -15,9 +15,9 @@
 
           <flexbox-item>
             <x-input :required=true ref="refPhone" title="电话" v-model="formData.phone" placeholder="请输入手机号  " is-type="china-mobile" @on-change="keyActive()" ></x-input>
-            <x-input placeholder="输入验证码" class="weui-vcode">
+<!--            <x-input placeholder="输入验证码" class="weui-vcode">
               <x-button slot="right" type="primary" mini>发送验证码</x-button>
-            </x-input>
+            </x-input>-->
           </flexbox-item>
         </flexbox>
         <flexbox-item span="50"></flexbox-item>
@@ -30,7 +30,7 @@
 
         <flexbox orient="vertical" :gutter="12">
           <flexbox-item>
-            <selector title="课程" v-model="formData.course" :options=courseOptions placeholder="请选择课程" direction="rtl"></selector>
+            <selector title="课程" v-model="formData.courseType" :options=courseTypeOptions placeholder="请选择课程" direction="rtl"></selector>
           </flexbox-item>
 
           <flexbox-item>
@@ -58,35 +58,41 @@
         <flexbox-item span="50"></flexbox-item>
       </flexbox>
       </div>
+      <toast v-model="show1" type="warn">{{"提交不成功"}}</toast>
+      <toast v-model="show2" type="cancel">{{'无需重复提交'}}</toast>
     </group>
+
 
 </template>
 
 <script>
     import { Group, Cell, Selector, XInput, Flexbox, FlexboxItem, XButton, XAddress, ChinaAddressV4Data, CheckIcon,} from 'vux'
-    import {XHeader, Card, Divider, Grid, GridItem, } from "vux"
+    import {XHeader, Card, Divider, Grid, GridItem, Toast} from "vux"
+    import success from "./Success.vue";
     export default {
       name: "try",
       components: {
         Group, Cell, Selector, XInput, Flexbox, FlexboxItem, XButton, XAddress, ChinaAddressV4Data, CheckIcon,
-        XHeader, Card, Divider, Grid, GridItem
+        XHeader, Card, Divider, Grid, GridItem,Toast,
       },
       data(){
         return {
           sexOptions: ["男", "女"],
           ageOptions:[6,7,8,9,10,11,12,13,14,15,16],
-          courseOptions:["scratch", "python", "c++"],
+          courseTypeOptions:["scratch", "python", "c++"],
           ChinaAddressV4Data:ChinaAddressV4Data,
           disabledVar: true,
           Address:[],
+          show1: false,
+          show2: false,
           formData: {
-            name: "12",
+            name: "",
             sex: "",
-            age: "",
-            phone:"19934255119",
+            age: null,
+            phone:"",
             //code:"",
             region:"",
-            course:"",
+            courseType:"",
           },
         }
       },
@@ -94,16 +100,26 @@
         submitForm() {
           let that = this;
           if (that.$refs.refPhone.valid && that.$refs.refName.valid){
-            //console.log(this.formData);
-            //this.$router.push('/success');
-            this.$http.get('/api/sign').then(({data}) => {
+            this.$http.post('/api/sign', that.formData).then(({data}) => {
               console.log(data)
+              if (data.status === "success") {
+                that.$router.push('/success');
+              } else {
+                if (data.status === "exist") {
+                  that.show2 = true
+                }
+                if (data.status === "failed") {
+                  that.show1 = true
+                }
+              }
             })
           }
         },
+
         keyActive(){
           this.disabledVar = !(this.$refs.refName.valid && this.$refs.refPhone.valid);
         },
+
         onShadowChange(ids,names){
           console.log(ids,names);
           this.formData.region= names[0] + "-" + names[1];

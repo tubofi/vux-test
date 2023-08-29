@@ -18,7 +18,7 @@
               <span>报名信息填报成功！稍后会有老师在24小时内联系您，请放心接听电话或者添加微信</span>
             </div>
             <br><br><br>
-            <x-button link="/home">返回首页</x-button>
+            <x-button type="primary" link="/home">返回首页</x-button>
           </div>
         </flexbox-item>
         <flexbox-item span="20"></flexbox-item>
