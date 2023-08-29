@@ -6,7 +6,11 @@ import FastClick from 'fastclick'
 import router from "./router/index";
 import App from './App'
 import Home from './components/HelloFromVux'
+import {AjaxPlugin} from "vux"
 
+
+Vue.use(AjaxPlugin);
+//Vue.http.post('/api').then();
 //Vue.use(router)
 //Vue.component('selector', Selector)
 
@@ -19,9 +23,9 @@ const router = new VueRouter({
   routes
 });*/
 
-FastClick.attach(document.body)
+FastClick.attach(document.body);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
