@@ -5,7 +5,8 @@
     <div>
       <img width="100%" src="../assets/saisi.png">
     </div>
-    <x-button link="/sign" type="primary">点击报名</x-button>
+    <x-button link="/sign" type="primary" style="font-size: 20px" :gradients="['#2471ff', '#9733ff']">👉点击报名👈</x-button>
+    <br><br><br><br><br>
   </group>
 </template>
 
