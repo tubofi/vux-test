@@ -3,7 +3,7 @@
     <x-header title="赛思少儿编程" :left-options="{showBack:false}"></x-header>
 
     <div>
-      <img width="100%" src="../assets/saisi.png">
+      <img width="100%" src="../assets/ppt_min.png">
     </div>
     <x-button link="/sign" type="primary" style="font-size: 20px" :gradients="['#2471ff', '#9733ff']">👉点击报名👈</x-button>
     <br><br><br><br><br>

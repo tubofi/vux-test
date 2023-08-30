@@ -129,7 +129,7 @@
         },
 
         onShadowChange(ids,names){
-          console.log(ids,names);
+          //console.log(ids,names);
           this.formData.region= names[0] + "-" + names[1];
         },
 
