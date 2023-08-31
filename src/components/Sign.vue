@@ -15,7 +15,7 @@
 
           <flexbox-item>
             <x-input :required=true ref="refPhone" title="电话" v-model="formData.phone" placeholder="请输入手机号  " is-type="china-mobile" @on-change="keyActive()" ></x-input>
-            <x-input :required=true ref="refCode" v-model="formData.code" placeholder="输入5位验证码" is-type="china-name" @on-change="keyActive()">
+            <x-input :required=true ref="refCode" v-model="formData.code" :min="5" :max='5' placeholder="输入5位验证码" is-type="china-name" @on-change="keyActive()">
               <x-button slot="right" type="primary" mini :disabled="checkCode.disabled" @click.native="getCode">{{checkCode.text}}</x-button>
             </x-input>
           </flexbox-item>
