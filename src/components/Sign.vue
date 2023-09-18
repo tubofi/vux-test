@@ -15,7 +15,7 @@
 
           <flexbox-item>
             <x-input :required=true ref="refPhone" title="电话" v-model="formData.phone" placeholder="请输入手机号  " is-type="china-mobile" @on-change="keyActive()" ></x-input>
-            <x-input :required=true ref="refCode" v-model="formData.code" placeholder="输入验证码" is-type="china-name" @on-change="keyActive()">
+            <x-input :required=true ref="refCode" v-model="formData.code" :min="5" :max='5' placeholder="输入5位验证码" is-type="china-name" @on-change="keyActive()">
               <x-button slot="right" type="primary" mini :disabled="checkCode.disabled" @click.native="getCode">{{checkCode.text}}</x-button>
             </x-input>
           </flexbox-item>
@@ -58,9 +58,8 @@
         <flexbox-item span="50"></flexbox-item>
       </flexbox>
       </div>
-      <toast v-model="show1" type="warn">{{"提交不成功"}}</toast>
-      <toast v-model="show2" type="cancel">{{'无需重复提交'}}</toast>
-      <toast v-model="show3" type="warn">{{"手机号不正确"}}</toast>
+      <toast v-model="toastMessage.codeStatus" type="warn">{{toastMessage.codeResponse}}</toast>
+      <toast v-model="toastMessage.signStatus" type="cancel">{{toastMessage.signResponse}}</toast>
     </group>
 
 
@@ -84,9 +83,6 @@
           ChinaAddressV4Data:ChinaAddressV4Data,
           disabledVar: true,
           Address:[],
-          show1: false,
-          show2: false,
-          show3: false,
           formData: {
             name: "",
             sex: "",
@@ -101,6 +97,12 @@
             TIME: 60,
             counter: 0,
             disabled: false
+          },
+          toastMessage: {
+            codeStatus: false,
+            codeResponse: "",
+            signStatus: false,
+            signResponse: "",
           }
         }
       },
@@ -113,12 +115,9 @@
               if (data.status === "success") {
                 that.$router.push('/success');
               } else {
-                if (data.status === "exist") {
-                  that.show2 = true
-                }
-                if (data.status === "failed") {
-                  that.show1 = true
-                }
+                that.toastMessage.signStatus = true;
+                that.toastMessage.signResponse = data.response;
+                console.log(data)
               }
             })
           }
@@ -141,16 +140,21 @@
             this.checkCode.disabled = true;
             this.countDown();
             this.$http.post('/api/code', {"phone": this.formData.phone}).then(({data}) => {
-              console.log(data)
+              //console.log(data);
+              if (data.status === "failed") {
+                this.toastMessage.codeStatus = true;
+                this.toastMessage.codeResponse = data.response
+              } else {}
             })
           } else {
-            this.show3 = true
+            this.toastMessage.codeStatus = true;
+            this.toastMessage.codeResponse = "手机号不可用"
           }
         },
         //倒计时
         countDown() {
           //console.log(this.checkCode.text);
-          var _this = this;
+          let _this = this;
           if (this.checkCode.counter === 0) {
             this.checkCode.text = "获取验证码";
             this.checkCode.disabled = false;

@@ -15,7 +15,7 @@
             <span class="success">报名成功</span>
             <br><br><br>
             <div>
-              <span>报名信息填报成功！稍后会有老师在24小时内联系您，请放心接听电话或者添加微信</span>
+              <span>报名信息填报成功！稍后会有老师在48小时内联系您，请放心接听电话或者添加微信</span>
             </div>
             <br><br><br>
             <x-button type="primary" link="/home">返回首页</x-button>
