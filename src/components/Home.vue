@@ -5,8 +5,20 @@
     <div>
       <img width="100%" src="../assets/main.png">
     </div>
-    <x-button link="/sign" type="primary" style="font-size: 20px" :gradients="['#2471ff', '#9733ff']">👉点击报名👈</x-button>
-    <br><br><br><br><br>
+    <flexbox orient="horizontal">
+      <flexbox-item span="50"><div></div></flexbox-item>
+      <flexbox-item span="50">
+        <div>
+        <x-button link="/sign" type="primary" style="font-size: 20px">👉点击报名👈</x-button>
+<!--          :gradients="['#2471ff', '#9733ff']"-->
+        </div>
+      </flexbox-item>
+      <flexbox-item span="50"><div></div></flexbox-item>
+
+    </flexbox>
+
+    <br><br><br>
+    <br><br><br>
   </group>
 </template>
 
