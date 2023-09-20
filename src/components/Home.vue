@@ -5,7 +5,7 @@
     <div>
       <img width="100%" src="../assets/header.png">
     </div>
-    <div style="width: 80%;margin: 0 auto;">
+    <div style="width: 90%;margin: 0 auto;">
       <flexbox orient="vertical" :gutter="12">
         <flexbox-item>1. 点击下方按钮填报学生信息（赛思少儿编程确保您的信息不会被泄露）</flexbox-item>
         <flexbox-item><x-button link="/sign" type="primary" style="font-size: 20px">👉点击报名👈</x-button></flexbox-item>
